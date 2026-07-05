@@ -1,23 +1,4 @@
 <?php
-/**
- * GestorArchivos.php
- *
- * Clase de Programación Orientada a Objetos encargada de gestionar
- * de forma segura la subida, listado y eliminación de archivos.
- *
- * Medidas de seguridad implementadas dentro de la clase:
- *  - Validación de extensión permitida (lista blanca).
- *  - Validación de tipo MIME real usando finfo (no confía en el
- *    Content-Type enviado por el navegador, que puede falsificarse).
- *  - Límite de tamaño de archivo.
- *  - Renombrado aleatorio del archivo (evita colisiones, sobrescritura
- *    y ejecución de archivos con nombre "adivinable").
- *  - Eliminación de la extensión doble / caracteres peligrosos.
- *  - Validación estricta del nombre de archivo al eliminar, para
- *    evitar ataques de Path Traversal (../../etc/passwd, etc.).
- *  - Verificación de que el archivo eliminado esté realmente dentro
- *    del directorio de subidas (realpath + strpos).
- */
 
 class GestorArchivos
 {
