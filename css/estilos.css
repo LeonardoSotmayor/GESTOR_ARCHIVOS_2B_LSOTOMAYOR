@@ -1,0 +1,485 @@
+/* ============================================================
+   Gestor de Archivos — tema "archivador"
+   Paleta: manila / verde gabinete / kraft-brass / papel cálido
+   Tipografía: Fraunces (display) + IBM Plex Sans (cuerpo) + IBM Plex Mono (metadatos)
+   ============================================================ */
+
+:root {
+    --cabinet: #2f4538;
+    --cabinet-dark: #202f26;
+    --manila: #e8d9ae;
+    --manila-dark: #d8c58f;
+    --paper: #f7f2e6;
+    --card: #fffdf7;
+    --kraft: #b9803f;
+    --kraft-dark: #9a6a30;
+    --ink: #2a2418;
+    --ink-soft: #6b6252;
+    --danger: #a13d33;
+    --danger-dark: #832f27;
+    --success: #3f6b4a;
+    --success-bg: #e7efe4;
+    --danger-bg: #f7e6e2;
+    --radio: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(185, 128, 63, 0.07), transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(47, 69, 56, 0.06), transparent 45%);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    font-family: "Fraunces", Georgia, serif;
+    letter-spacing: -0.01em;
+    color: var(--cabinet-dark);
+    margin: 0;
+}
+
+.cabinet {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+    background-color: var(--cabinet);
+    color: #f5efe0;
+    border-radius: var(--radio) var(--radio) 0 0;
+    padding: 1.75rem 2rem;
+}
+
+.site-header__marca {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.site-header__icono {
+    font-size: 2.1rem;
+}
+
+.site-header h1 {
+    color: #fbf6ea;
+    font-size: 1.5rem;
+}
+
+.site-header p {
+    margin: 0.2rem 0 0 0;
+    color: #cfd6c8;
+    font-size: 0.92rem;
+}
+
+/* ---------- Pestañas tipo carpeta manila ---------- */
+
+.folder-tabs {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0 1.25rem;
+    background-color: var(--cabinet);
+    border-radius: 0;
+}
+
+.folder-tab {
+    display: inline-block;
+    padding: 0.65rem 1.4rem 0.55rem;
+    background-color: var(--cabinet-dark);
+    color: #cfd6c8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    top: 2px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.folder-tab:hover {
+    background-color: #35493c;
+    color: #fff;
+}
+
+.folder-tab--activa,
+.folder-tab--activa:hover {
+    background-color: var(--manila);
+    color: var(--ink);
+    top: 0;
+}
+
+/* ---------- Panel principal (el "interior" de la carpeta) ---------- */
+
+.folder-panel {
+    background-color: var(--manila);
+    padding: 2rem;
+    border-radius: 0 0 var(--radio) var(--radio);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 60vh;
+}
+
+/* ---------- Hero (inicio) ---------- */
+
+.hero {
+    background-color: var(--card);
+    border-radius: var(--radio);
+    padding: 2.25rem 2rem;
+    box-shadow: 0 2px 10px rgba(42, 36, 24, 0.08);
+}
+
+.hero__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--kraft-dark);
+    margin: 0 0 0.6rem 0;
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.hero h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+}
+
+.hero__texto {
+    color: var(--ink-soft);
+    max-width: 55ch;
+}
+
+.hero__acciones {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- Tarjetas resumen (inicio) ---------- */
+
+.tarjetas-resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.tarjeta-indice {
+    background-color: var(--card);
+    border-radius: var(--radio);
+    padding: 1.2rem 1.3rem;
+    box-shadow: 0 2px 8px rgba(42, 36, 24, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-top: 3px solid var(--kraft);
+}
+
+.tarjeta-indice__numero {
+    font-family: "Fraunces", serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cabinet-dark);
+}
+
+.tarjeta-indice__etiqueta {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+}
+
+/* ---------- Tarjetas genéricas ---------- */
+
+.tarjeta {
+    background-color: var(--card);
+    border-radius: var(--radio);
+    padding: 1.75rem 2rem;
+    box-shadow: 0 2px 10px rgba(42, 36, 24, 0.08);
+}
+
+.tarjeta__encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tarjeta h2 {
+    font-size: 1.3rem;
+}
+
+.tarjeta--ultimo h3 {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+}
+
+.ayuda {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+/* ---------- Ficha de "último archivo" ---------- */
+
+.ficha-ultimo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ficha-ultimo__sello {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: var(--manila);
+    color: var(--kraft-dark);
+    padding: 0.4rem 0.55rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.ficha-ultimo__titulo {
+    margin: 0;
+    font-weight: 600;
+}
+
+.ficha-ultimo__meta {
+    margin: 0.15rem 0 0 0;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace;
+}
+
+/* ---------- Formulario de subida ---------- */
+
+.formulario-subida {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.campo label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.campo input[type="text"],
+.campo input[type="file"] {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1.5px solid #ddd0ae;
+    border-radius: 8px;
+    background-color: #fffefb;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+}
+
+.campo input[type="text"]:focus,
+.campo input[type="file"]:focus {
+    outline: 2px solid var(--kraft);
+    outline-offset: 1px;
+    border-color: var(--kraft);
+}
+
+.campo__ayuda {
+    margin: 0.35rem 0 0 0;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+}
+
+/* ---------- Botones ---------- */
+
+button, .boton {
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    transition: transform 0.05s ease, background-color 0.15s ease;
+}
+
+button:active, .boton:active {
+    transform: translateY(1px);
+}
+
+.boton-primario {
+    background-color: var(--kraft);
+    color: #fff;
+}
+.boton-primario:hover { background-color: var(--kraft-dark); }
+
+.boton-secundario {
+    background-color: transparent;
+    color: var(--cabinet-dark);
+    border: 1.5px solid var(--cabinet);
+}
+.boton-secundario:hover { background-color: rgba(47, 69, 56, 0.08); }
+
+.boton-peligro {
+    background-color: transparent;
+    color: var(--danger);
+    border: 1.5px solid var(--danger);
+}
+.boton-peligro:hover { background-color: var(--danger-bg); }
+
+.boton-pequeno {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.82rem;
+}
+
+/* ---------- Listado de archivos (fichas tipo tarjetero) ---------- */
+
+.lista-fichas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.ficha {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    background-color: #fffefb;
+    border: 1px solid #ece1c4;
+    border-left: 4px solid var(--kraft);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.ficha__sello {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background-color: var(--manila);
+    color: var(--kraft-dark);
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    min-width: 2.6rem;
+    text-align: center;
+}
+
+.ficha__info {
+    flex: 1;
+    min-width: 180px;
+}
+
+.ficha__titulo {
+    margin: 0;
+    font-weight: 600;
+}
+
+.ficha__meta {
+    margin: 0.2rem 0 0 0;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.ficha__acciones {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.ficha__acciones form {
+    margin: 0;
+}
+
+/* ---------- Estado vacío ---------- */
+
+.estado-vacio {
+    text-align: center;
+    padding: 2.5rem 1rem;
+}
+
+.estado-vacio__icono {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.estado-vacio__titulo {
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+}
+
+.estado-vacio .boton {
+    margin-top: 1rem;
+}
+
+/* ---------- Alertas ---------- */
+
+.alerta {
+    padding: 0.85rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+}
+
+.alerta-exito {
+    background-color: var(--success-bg);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.alerta-error {
+    background-color: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    text-align: center;
+    padding: 1.2rem;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 560px) {
+    .folder-panel { padding: 1.25rem; }
+    .hero, .tarjeta { padding: 1.4rem; }
+    .folder-tab { padding: 0.55rem 0.9rem; font-size: 0.85rem; }
+    .site-header { padding: 1.25rem 1.4rem; }
+    .ficha { flex-direction: column; align-items: flex-start; }
+    .ficha__acciones { width: 100%; }
+}
+
+/* ---------- Accesibilidad: foco visible ---------- */
+
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--kraft);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}

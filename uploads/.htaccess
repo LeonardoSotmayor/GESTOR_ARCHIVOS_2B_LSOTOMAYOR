@@ -1,0 +1,15 @@
+# Evita que el servidor ejecute cualquier script dentro de /uploads,
+# incluso si alguien lograra subir un archivo con doble extensión.
+
+# Deshabilita la ejecución de PHP
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|cgi|sh|asp|aspx)$">
+    Require all denied
+</FilesMatch>
+
+# Impide listar el contenido de la carpeta directamente
+Options -Indexes -ExecCGI
+
+# Fuerza la descarga en lugar de la ejecución/interpretación en el navegador
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
